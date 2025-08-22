@@ -1,4 +1,4 @@
-# Medium Clone Backend API
+# npxblog Backend API
 
 A robust, scalable backend API for a Medium-style blogging platform built with Node.js, Express, and MongoDB.
 
