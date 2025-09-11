@@ -7,15 +7,27 @@ import { createUserSchema,updateBioSchema } from "../utils/ZodValidations.js";
 import User from "../models/UserModel.js";
 
 export const signup = async({input})=>{
+    
+    const normalized = {
+        name: input?.name,
+        email: input?.email,
+        password: input?.password,
+        bio: input?.bio ?? undefined,
+        avatar: input?.avatar ? input.avatar : undefined,
+    };
 
-    const validatedata = createUserSchema.safeParse(input);
+    // Validate incoming payload safely //hamesa yahi pe krle.
+    const validatedata = createUserSchema.safeParse(normalized);
 
-    if(!validatedata.success){
-        
-        return {errors: validatedata.error.errors.map(err=>({
-            field: err.path.join('.'),
-            message:err.message
-        }))}
+    if (!validatedata.success) {
+        const issues = validatedata.error?.issues ?? [];
+        return {
+            error: 'VALIDATION_ERROR',
+            errors: issues.map(err => ({
+                field: Array.isArray(err.path) ? err.path.join('.') : String(err.path ?? ''),
+                message: err.message
+            }))
+        };
     }
 
     const userCreate = validatedata.data;
@@ -31,12 +43,12 @@ export const signup = async({input})=>{
         avatar: userCreate.avatar || "",
         followers: [],
         following:[],
-        likedPosts:[]
+        likedPost:[]
 
     }
     const user = await User.create(data);
 
-    const token = jwt.sign( {userCreate:{id:user._id}} , process.env.JWT_SECRET,{expiresIn:"1d"});
+    const token = jwt.sign( {userId: user._id} , process.env.JWT_SECRET,{expiresIn:"1d"});
     return {user:user,token};
 }
 
@@ -45,7 +57,6 @@ export const signup = async({input})=>{
 export const Userlogin = async({input})=>{
 
     const {email,password} = input;
-
     const user = await User.findOne({email})
 
     if(!user){
@@ -56,11 +67,9 @@ export const Userlogin = async({input})=>{
 
     if(!isMatch)return {error:"Invalid credentials"};
 
-    const token = jwt.sign({userId:{id:user._id}} , process.env.JWT_SECRET,{expiresIn:"1d"});
+    const token = jwt.sign({userId: user._id} , process.env.JWT_SECRET,{expiresIn:"1d"});
     console.log("login service:",token);
     return token;
-        
-  
 }
 
 
@@ -69,7 +78,7 @@ export const BioUpdate = async(userId,{bio})=>{
     try{
         const validatied = updateBioSchema.safeParse({bio});
         if(!validatied.success) {
-            return {error:error.message}
+            return {error: validatied.error.message}
         }
         const updateUser  = await User.findByIdAndUpdate(
             userId,

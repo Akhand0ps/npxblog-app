@@ -1,5 +1,5 @@
 
-import { da } from "zod/v4/locales";
+import jwt from "jsonwebtoken";
 import BlacklistToken from "../models/BlacklistToken.js";
 import User from "../models/UserModel.js"
 
@@ -22,21 +22,32 @@ export const register = async(req,res)=>{
             name,email,password,bio,avatar
         }
 
-        const {user:createdUser,token} = await signup({
-            input
-        })
+        const signupResult = await signup({ input });
+
+        if (signupResult?.error) {
+            return res.status(400).json({
+                message: 'Validation failed',
+                errors: signupResult.errors || []
+            });
+        }
+
+        const { user: createdUser, token } = signupResult;
+
+        if (!createdUser || !token) {
+            return res.status(500).json({ message: 'Failed to create user' });
+        }
 
         //ab cookie bana
     
         
         res.cookie("token",token,{
             httpOnly:true,
-            secure:true,
-            sameSite:"Strict",
+            secure:process.env.NODE_ENV === "production",
+            sameSite:process.env.NODE_ENV === "production" ? "Strict" : "Lax",
             maxAge:1*24*60*60*1000 
         });
 
-        console.log("token created");
+    console.log("token created");
         res.status(201).json({
             message:"User registered successfully",
             userId:createdUser._id,
@@ -70,11 +81,10 @@ export const login = async(req,res)=>{
         res.cookie("token",token,{
 
             httpOnly:true,
-            secure:true,
-            sameSite:"Strict",
+            secure:process.env.NODE_ENV === "production",
+            sameSite:process.env.NODE_ENV === "production" ? "Strict" : "Lax",
             maxAge:1*24*60*60*1000
         })
-
         console.log("logged in")
         res.status(200).json({
             token,
@@ -115,7 +125,7 @@ export const logout = async(req,res)=>{
         return res.status(200).json({message:"Logged out successfully"});
     }catch(err){
 
-        console.error(error);
+        console.error(err);
         return res.status(500).json({message:"INTERNAL SERVER ERROR"});
     }
 
@@ -128,12 +138,32 @@ export const updateBio = async(req,res)=>{
         const {bio} = req.body;
 
         const updatedBio = await BioUpdate(userId,{bio});
-        if(updateBio.error) return res.status(404).json({message:"User not found"});
+        if(updatedBio.error) return res.status(404).json({message:"User not found"});
 
-        return res.status(200).json({message:"Bio updated successfully",user:updatedBio.user});
+        return res.status(200).json({message:"Bio updated successfully",user:updatedBio});
     }catch(err){
         console.error(err);
         return res.status(500).json({message:"Error occured in updating bio"});
+    }
+}
+
+export const updateAvatar = async(req,res)=>{
+    try{
+        const {userId} = req.params;
+        const {avatar} = req.body;
+
+        const user = await User.findByIdAndUpdate(
+            userId,
+            {avatar: avatar},
+            {new: true}
+        );
+
+        if(!user) return res.status(404).json({message:"User not found"});
+
+        return res.status(200).json({message:"Avatar updated successfully",user});
+    }catch(err){
+        console.error(err);
+        return res.status(500).json({message:"Error occured in updating avatar"});
     }
 }
 
@@ -145,7 +175,7 @@ export const profile = async(req,res)=>{
         const userId = req.user.id;
         console.log("userid:",userId);
 
-        const data = await User.findById(userId).select("name email bio")
+        const data = await User.findById(userId).select("name email bio avatar following followers likedPost")
     
         console.log("Data: ",data);
         return res.status(200).json({data});
