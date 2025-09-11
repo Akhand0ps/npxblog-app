@@ -1,0 +1,12 @@
+
+@import "tailwindcss";
+
+:root {
+  --primary: #1a1a1a;          /* Dark text */
+  --secondary: #6b7280;        /* Gray text */
+  --accent: #059669;           /* Green for actions */
+  --background: #ffffff;       /* White background */
+  --surface: #f9fafb;          /* Light gray surface */
+  --border: #e5e7eb;           /* Subtle borders */
+  --error: #dc2626;            /* Red for errors */
+}
