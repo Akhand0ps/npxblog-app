@@ -86,7 +86,7 @@ export const OnePostService = async({slug})=>{
     try{
 
         const post = await Post.findOne({slug})
-            .select("title content description imageUrl likes createdAt author comments")
+            .select("title slug content description imageUrl likes createdAt author comments")
             .populate("author","name email");
 
 

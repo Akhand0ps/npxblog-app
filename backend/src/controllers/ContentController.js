@@ -178,3 +178,19 @@ export const getFeed = async(req,res)=>{
         res.status(500).json({message:"INTERNAL SERVER ERROR",error:err.message})
     }
 }
+
+// Public: get posts by user id
+export const getPostsByUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const posts = await Post.find({ author: userId })
+            .sort({ createdAt: -1 })
+            .select("title slug description imageUrl createdAt likes comments author")
+            .populate("author", "name avatar");
+
+        return res.status(200).json({ posts });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "INTERNAL SERVER ERROR" });
+    }
+}

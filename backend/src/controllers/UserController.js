@@ -184,3 +184,31 @@ export const profile = async(req,res)=>{
         return res.status(500).json({message:"INTERNAL SERVER ERROR"});
     }
 }
+
+// Public profile by user ID (no auth required)
+export const publicProfile = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await User.findById(userId)
+            .select("name bio avatar followers following createdAt updatedAt");
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // Return as a plain object to avoid exposing Mongoose internals
+        const data = {
+            _id: user._id,
+            name: user.name,
+            bio: user.bio || "",
+            avatar: user.avatar || "",
+            followers: user.followers || [],
+            following: user.following || [],
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+        };
+
+        return res.status(200).json({ data });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "INTERNAL SERVER ERROR" });
+    }
+}
