@@ -1,5 +1,5 @@
 // API utility functions - matching backend endpoints
-const API_BASE_URL = 'http://localhost:3000/api/v1'; // Backend runs on port 3000
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
 
 class ApiError extends Error {
   public status: number;

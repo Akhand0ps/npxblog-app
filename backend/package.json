@@ -1,16 +1,22 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "NPX Blog Backend API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon src/index.js"
+    "dev": "npx nodemon index.js",
+    "start": "node index.js",
+    "build": "echo 'No build step required for Node.js'"
   },
-  "keywords": [],
+  "keywords": ["blog", "api", "express", "mongodb"],
   "author": "",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
