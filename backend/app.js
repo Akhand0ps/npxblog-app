@@ -12,7 +12,10 @@ const app = express();
 
 app.use(cors({
   origin: ["http://localhost:5173","https://npxbg.vercel.app"],   
-  credentials: true                  
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  exposedHeaders: ['Set-Cookie']
 }));
 app.use(express.json());
 app.use(cookieParser());
