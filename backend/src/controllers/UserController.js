@@ -40,11 +40,12 @@ export const register = async(req,res)=>{
         //ab cookie bana
     
         
-        res.cookie("token",token,{
-            httpOnly:true,
-            secure:process.env.NODE_ENV === "production",
-            sameSite:process.env.NODE_ENV === "production" ? "None" : "Lax",
-            maxAge:1*24*60*60*1000 
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            maxAge: 1 * 24 * 60 * 60 * 1000,
+            path: "/",
         });
 
     console.log("token created");
@@ -78,12 +79,12 @@ export const login = async(req,res)=>{
         
         console.log("token hai ye: ",token);
 
-        res.cookie("token",token,{
-
-            httpOnly:true,
-            secure:process.env.NODE_ENV === "production",
-            sameSite:process.env.NODE_ENV === "production" ? "None" : "Lax",
-            maxAge:1*24*60*60*1000
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            maxAge: 1 * 24 * 60 * 60 * 1000,
+            path: "/",
         })
         console.log("logged in")
         res.status(200).json({
@@ -116,10 +117,11 @@ export const logout = async(req,res)=>{
         await BlacklistToken.create({token});
         //ab cookie clear krde
 
-        res.clearCookie("token",{
-            httpOnly:true,
-            secure:process.env.NODE_ENV ==="production",
-            sameSite:"Strict"
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            path: "/",
         })
 
         return res.status(200).json({message:"Logged out successfully"});

@@ -10,13 +10,19 @@ import FeedR from "./src/routes/feedRoute.js";
 import cookieParser from "cookie-parser";
 const app = express();
 
-app.use(cors({
-  origin: ["http://localhost:5173","https://npxbg.vercel.app"],   
+// Trust proxy so secure cookies work correctly behind Render/other proxies
+app.set('trust proxy', 1);
+
+const corsOptions = {
+  origin: ["http://localhost:5173", "https://npxbg.vercel.app"],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-  exposedHeaders: ['Set-Cookie']
-}));
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  // Do not hardcode allowedHeaders/exposedHeaders so cors reflects request headers dynamically
+};
+
+app.use(cors(corsOptions));
+// Explicitly handle preflight for all routes
+app.options("*", cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
