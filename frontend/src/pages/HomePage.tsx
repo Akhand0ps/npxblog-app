@@ -124,9 +124,9 @@ const HomePage: React.FC = () => {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-gradient-to-br from-indigo-400/20 to-fuchsia-500/20 blur-3xl animate-float-delayed"></div>
 
         {/* Hero */}
-  <section className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-10 sm:pb-12">
-          <div className="grid lg:grid-cols-12 gap-8 md:gap-10 items-center">
-            <div className="lg:col-span-7">
+  <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-10 sm:pb-12">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="lg:col-span-7 xl:col-span-6">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-sm">
                 <Rocket size={12} className="sm:hidden" />
                 <Rocket size={14} className="hidden sm:inline" />
@@ -166,7 +166,7 @@ const HomePage: React.FC = () => {
             </div>
 
             {/* Hero Visual */}
-            <div className="hidden md:block lg:col-span-5">
+            <div className="hidden lg:block lg:col-span-5 xl:col-span-6">
               <div className="relative rounded-3xl border border-gray-200 bg-white shadow-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-50 via-transparent to-transparent" />
                 <div className="relative p-6">
@@ -188,7 +188,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Value props */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="group p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all">
               <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center mb-4">

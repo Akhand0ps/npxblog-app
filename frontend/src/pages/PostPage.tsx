@@ -164,7 +164,7 @@ const PostPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-3xl lg:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 px-6 py-4 mb-6 rounded">
           {error}

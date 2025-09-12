@@ -214,7 +214,7 @@ const ProfilePage: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Profile Header */}
       <div className="border-b border-gray-200 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8">
             <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-200 rounded-full flex items-center justify-center relative group mx-auto md:mx-0">
               {user.avatar ? (
@@ -331,7 +331,7 @@ const ProfilePage: React.FC = () => {
       </div>
 
       {/* Profile Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <div className="flex space-x-6 md:space-x-8 mb-8 md:mb-12">
           <button className="text-gray-900 font-medium border-b-2 border-gray-900 pb-2 cursor-pointer">
             Stories

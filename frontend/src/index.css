@@ -490,35 +490,35 @@ body {
   
   /* Mobile typography */
   .prose h1 {
-    font-size: 2rem;
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
+    font-size: 1.875rem; /* 30px */
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
   }
   
   .prose h2 {
-    font-size: 1.75rem;
-    line-height: 1.2;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .prose h3 {
-    font-size: 1.375rem;
+    font-size: 1.5rem; /* 24px */
     line-height: 1.25;
     margin-top: 1.75rem;
     margin-bottom: 0.75rem;
   }
   
-  .prose h4 {
-    font-size: 1.125rem;
+  .prose h3 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.3;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
   }
   
+  .prose h4 {
+    font-size: 1.125rem; /* 18px */
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
   .prose p {
-    font-size: 1rem;
+    font-size: 1rem; /* 16px */
     line-height: 1.7;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
   
   /* Mobile-friendly forms */
@@ -543,20 +543,44 @@ body {
 @media (max-width: 640px) {
   /* Even smaller mobile devices */
   body {
-    font-size: 0.875rem;
+    font-size: 0.9375rem; /* 15px */
     line-height: 1.6;
   }
   
   .prose h1 {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* 28px */
   }
   
   .prose h2 {
-    font-size: 1.5rem;
+    font-size: 1.375rem; /* 22px */
   }
   
   .prose h3 {
+    font-size: 1.1875rem; /* 19px */
+  }
+  
+  /* Extra small screens */
+  .container-responsive {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1440px) {
+  .prose h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+  
+  .prose h2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+  
+  .prose p {
     font-size: 1.25rem;
+    line-height: 1.8;
   }
 }
 
