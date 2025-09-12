@@ -11,7 +11,8 @@ const connectDB = async()=>{
     }catch(err){
 
         console.error("Mongo failed:",err.message);
-        process.exit(1);
+        // Do not exit process; allow app to continue running so hosting can detect open port
+        throw err;
     }
 }
 

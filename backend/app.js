@@ -21,8 +21,13 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// Explicitly handle preflight for all routes
-app.options("*", cors(corsOptions));
+// Explicitly handle preflight requests for all routes without using wildcard path syntax
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return cors(corsOptions)(req, res, () => res.sendStatus(204));
+  }
+  next();
+});
 app.use(express.json());
 app.use(cookieParser());
 
