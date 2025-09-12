@@ -124,28 +124,28 @@ const HomePage: React.FC = () => {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-gradient-to-br from-indigo-400/20 to-fuchsia-500/20 blur-3xl animate-float-delayed"></div>
 
         {/* Hero */}
-  <section className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-10 sm:pb-12">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-7 xl:col-span-6">
+  <section className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div className="lg:col-span-8 xl:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-sm">
                 <Rocket size={12} className="sm:hidden" />
                 <Rocket size={14} className="hidden sm:inline" />
                 <span className="hidden sm:inline">New: Write, Learn, and Ship faster</span>
                 <span className="sm:hidden">New Features</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight leading-[1.15] sm:leading-[1.1] lg:leading-[1.05] text-gray-900 mb-4 sm:mb-5 text-center lg:text-left">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black tracking-tight leading-tight sm:leading-[1.1] lg:leading-[1.05] text-gray-900 mb-4 sm:mb-5 text-center lg:text-left">
                 Build ideas. <span className="gradient-text">Write boldly.</span> Ship stories.
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed text-center lg:text-left">
                 npx is where makers and thinkers share what they’re building. Publish in minutes, grow an audience, and discover what’s next.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <button onClick={() => navigate('/register')} className="group inline-flex items-center justify-center gap-2 bg-black text-white px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl btn-touch">
+                <button onClick={() => navigate('/register')} className="group inline-flex items-center justify-center gap-2 bg-black text-white px-6 sm:px-7 py-4 sm:py-3.5 rounded-full font-semibold hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl btn-touch min-h-[48px]">
                   <PenTool size={16} className="sm:hidden group-hover:-rotate-6 transition-transform" />
                   <PenTool size={18} className="hidden sm:inline group-hover:-rotate-6 transition-transform" />
                   <span>Start writing</span>
                 </button>
-                <button onClick={() => navigate('/login')} className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-800 transition-all btn-touch">
+                <button onClick={() => navigate('/login')} className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-4 sm:py-3.5 rounded-full font-semibold border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-800 transition-all btn-touch min-h-[48px]">
                   <Compass size={16} className="sm:hidden" />
                   <Compass size={18} className="hidden sm:inline" />
                   <span>Explore first</span>
@@ -153,11 +153,11 @@ const HomePage: React.FC = () => {
               </div>
 
               {/* Trending topics */}
-              <div className="mt-10">
+              <div className="mt-8 sm:mt-10">
                 <div className="text-sm font-semibold text-gray-700 mb-3">Trending topics</div>
-                <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-1">
+                <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar pb-2">
                   {['AI', 'Design', 'Startups', 'Web Dev', 'Product', 'Data', 'Open Source'].map((t) => (
-                    <Link key={t} to={`/`} className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm whitespace-nowrap transition-colors">
+                    <Link key={t} to={`/`} className="px-3 sm:px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm whitespace-nowrap transition-colors min-h-[40px] flex items-center justify-center">
                       {t}
                     </Link>
                   ))}
@@ -188,7 +188,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Value props */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="group p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-md transition-all">
               <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center mb-4">
@@ -222,14 +222,14 @@ const HomePage: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white">
-        <div className="container-responsive py-4 sm:py-6 lg:py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
           <div className="text-center sm:text-left w-full sm:w-auto">
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 tracking-tight">Following</h1>
             <p className="text-gray-600 text-sm sm:text-base mt-1">Fresh stories from writers you follow</p>
           </div>
           <Link
             to="/write"
-            className="inline-flex items-center gap-2 bg-black text-white px-4 sm:px-5 py-2.5 rounded-full font-semibold hover:bg-gray-800 transition-colors btn-touch w-full sm:w-auto justify-center"
+            className="inline-flex items-center gap-2 bg-black text-white px-4 sm:px-5 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors btn-touch w-full sm:w-auto justify-center min-h-[48px]"
           >
             <PenTool size={16} /> 
             <span>New Story</span>
@@ -239,7 +239,7 @@ const HomePage: React.FC = () => {
 
       {/* Error Message */}
       {error && (
-        <div className="container-responsive pt-6 sm:pt-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 sm:px-6 py-4 rounded-lg mb-6 flex items-start space-x-3">
             <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
               <span className="text-white text-xs font-bold">!</span>
@@ -258,7 +258,7 @@ const HomePage: React.FC = () => {
       )}
 
       {/* Posts Feed */}
-      <div className="container-responsive py-4 sm:py-6 lg:py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {loading && posts.length === 0 ? (
           <div className="space-y-12">
             {[...Array(3)].map((_, index) => (
@@ -266,24 +266,24 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         ) : posts.length === 0 && !loading ? (
-            <div className="text-center py-16 sm:py-20">
+            <div className="text-center py-12 sm:py-16">
             <div className="w-16 sm:w-20 h-16 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Heart className="w-8 sm:w-10 h-8 sm:h-10 text-gray-400" aria-hidden="true" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">No stories yet</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">No stories yet</h2>
             <p className="text-gray-600 mb-6 sm:mb-8 max-w-md mx-auto text-base sm:text-lg leading-relaxed px-4">
               Start following writers or be the first to share your thoughts!
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
               <Link
                 to="/write"
-                className="bg-black text-white px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 btn-touch text-center"
+                className="bg-black text-white px-6 sm:px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 btn-touch text-center min-h-[48px] flex items-center justify-center"
               >
                 Write your first story
               </Link>
               <button
                 onClick={() => fetchPosts()}
-                className="text-gray-600 hover:text-gray-900 px-6 sm:px-8 py-3 rounded-full border border-gray-300 hover:border-gray-400 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 btn-touch"
+                className="text-gray-600 hover:text-gray-900 px-6 sm:px-8 py-4 rounded-full border border-gray-300 hover:border-gray-400 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 btn-touch min-h-[48px] flex items-center justify-center"
               >
                 Refresh feed
               </button>
@@ -396,7 +396,7 @@ const HomePage: React.FC = () => {
             <button
               onClick={() => fetchPosts(true)}
               disabled={loading}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-6 sm:px-8 py-3 rounded-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 inline-flex items-center space-x-2 btn-touch"
+              className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-6 sm:px-8 py-4 rounded-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 inline-flex items-center space-x-2 btn-touch min-h-[48px]"
             >
               {loading ? (
                 <>
