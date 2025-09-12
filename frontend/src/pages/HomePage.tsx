@@ -127,21 +127,28 @@ const HomePage: React.FC = () => {
   <section className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <div className="grid lg:grid-cols-12 gap-8 md:gap-10 items-center">
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-xs font-semibold mb-5 shadow-sm">
-                <Rocket size={14} /> New: Write, Learn, and Ship faster
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black text-white text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-sm">
+                <Rocket size={12} className="sm:hidden" />
+                <Rocket size={14} className="hidden sm:inline" />
+                <span className="hidden sm:inline">New: Write, Learn, and Ship faster</span>
+                <span className="sm:hidden">New Features</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.2] sm:leading-[1.1] md:leading-[1.05] text-gray-900">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight leading-[1.15] sm:leading-[1.1] lg:leading-[1.05] text-gray-900 mb-4 sm:mb-5 text-center lg:text-left">
                 Build ideas. <span className="gradient-text">Write boldly.</span> Ship stories.
               </h1>
-              <p className="mt-4 sm:mt-5 text-base md:text-lg text-gray-600 max-w-2xl">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed text-center lg:text-left">
                 npx is where makers and thinkers share what they’re building. Publish in minutes, grow an audience, and discover what’s next.
               </p>
-              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <button onClick={() => navigate('/register')} className="group inline-flex items-center justify-center gap-2 bg-black text-white px-5 sm:px-7 py-3 rounded-full font-semibold hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl cursor-pointer w-full sm:w-auto">
-                  <PenTool size={18} className="group-hover:-rotate-6 transition-transform" /> Start writing
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <button onClick={() => navigate('/register')} className="group inline-flex items-center justify-center gap-2 bg-black text-white px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl btn-touch">
+                  <PenTool size={16} className="sm:hidden group-hover:-rotate-6 transition-transform" />
+                  <PenTool size={18} className="hidden sm:inline group-hover:-rotate-6 transition-transform" />
+                  <span>Start writing</span>
                 </button>
-                <button onClick={() => navigate('/login')} className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-3 rounded-full font-semibold border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-800 transition-all cursor-pointer w-full sm:w-auto">
-                  <Compass size={18} /> Explore first
+                <button onClick={() => navigate('/login')} className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-semibold border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-800 transition-all btn-touch">
+                  <Compass size={16} className="sm:hidden" />
+                  <Compass size={18} className="hidden sm:inline" />
+                  <span>Explore first</span>
                 </button>
               </div>
 
@@ -215,32 +222,33 @@ const HomePage: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Following</h1>
-            <p className="text-gray-600 text-sm sm:text-base">Fresh stories from writers you follow</p>
+        <div className="container-responsive py-4 sm:py-6 lg:py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="text-center sm:text-left w-full sm:w-auto">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 tracking-tight">Following</h1>
+            <p className="text-gray-600 text-sm sm:text-base mt-1">Fresh stories from writers you follow</p>
           </div>
           <Link
             to="/write"
-            className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-semibold hover:bg-gray-800 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 bg-black text-white px-4 sm:px-5 py-2.5 rounded-full font-semibold hover:bg-gray-800 transition-colors btn-touch w-full sm:w-auto justify-center"
           >
-            <PenTool size={16} /> New Story
+            <PenTool size={16} /> 
+            <span>New Story</span>
           </Link>
         </div>
       </div>
 
       {/* Error Message */}
       {error && (
-        <div className="max-w-4xl mx-auto px-4 pt-8">
-          <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded-lg mb-6 flex items-center space-x-3">
-            <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+        <div className="container-responsive pt-6 sm:pt-8">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 sm:px-6 py-4 rounded-lg mb-6 flex items-start space-x-3">
+            <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
               <span className="text-white text-xs font-bold">!</span>
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <p className="font-medium">{error}</p>
               <button
                 onClick={() => fetchPosts()}
-                className="text-red-600 hover:text-red-800 underline text-sm font-medium mt-1"
+                className="text-red-600 hover:text-red-800 underline text-sm font-medium mt-1 btn-touch"
               >
                 Try again
               </button>
@@ -250,7 +258,7 @@ const HomePage: React.FC = () => {
       )}
 
       {/* Posts Feed */}
-  <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="container-responsive py-4 sm:py-6 lg:py-8">
         {loading && posts.length === 0 ? (
           <div className="space-y-12">
             {[...Array(3)].map((_, index) => (
@@ -258,121 +266,124 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         ) : posts.length === 0 && !loading ? (
-          <div className="text-center py-20">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart className="w-10 h-10 text-gray-400" aria-hidden="true" />
+            <div className="text-center py-16 sm:py-20">
+            <div className="w-16 sm:w-20 h-16 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Heart className="w-8 sm:w-10 h-8 sm:h-10 text-gray-400" aria-hidden="true" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">No stories yet</h2>
-            <p className="text-gray-600 mb-8 max-w-md mx-auto text-lg leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">No stories yet</h2>
+            <p className="text-gray-600 mb-6 sm:mb-8 max-w-md mx-auto text-base sm:text-lg leading-relaxed px-4">
               Start following writers or be the first to share your thoughts!
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
               <Link
                 to="/write"
-                className="bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+                className="bg-black text-white px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 btn-touch text-center"
               >
                 Write your first story
               </Link>
               <button
                 onClick={() => fetchPosts()}
-                className="text-gray-600 hover:text-gray-900 px-8 py-3 rounded-full border border-gray-300 hover:border-gray-400 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="text-gray-600 hover:text-gray-900 px-6 sm:px-8 py-3 rounded-full border border-gray-300 hover:border-gray-400 font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 btn-touch"
               >
                 Refresh feed
               </button>
             </div>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {posts.map((post, index) => (
               <article 
                 key={post._id} 
-                className="group border border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 rounded-2xl p-6 transition-all shadow-sm hover:shadow-md"
+                className="group border border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all shadow-sm hover:shadow-md"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  {/* Author Avatar */}
-                  <div className="flex-shrink-0">
-                    <Link to={getAuthorId(post.author) ? `/user/${getAuthorId(post.author)}` : '/profile'} className="block">
-                      <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center ring-0 group-hover:ring-2 group-hover:ring-gray-300 transition-all duration-200">
+                <div className="flex flex-col gap-4">
+                  {/* Author Info */}
+                  <div className="flex items-center gap-3">
+                    <Link to={getAuthorId(post.author) ? `/user/${getAuthorId(post.author)}` : '/profile'} className="flex-shrink-0">
+                      <div className="w-10 sm:w-12 h-10 sm:h-12 bg-gray-200 rounded-full flex items-center justify-center ring-0 group-hover:ring-2 group-hover:ring-gray-300 transition-all duration-200">
                         {getAuthorAvatar(post.author) ? (
                           <img
                             src={getAuthorAvatar(post.author)!}
                             alt={getAuthorName(post.author)}
-                            className="w-12 h-12 rounded-full object-cover"
+                            className="w-10 sm:w-12 h-10 sm:h-12 rounded-full object-cover"
                           />
                         ) : (
-                          <span className="text-gray-600 font-semibold text-lg">
+                          <span className="text-gray-600 font-semibold text-sm sm:text-lg">
                             {getAuthorName(post.author).charAt(0).toUpperCase()}
                           </span>
                         )}
                       </div>
                     </Link>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center space-x-2">
+                        <Link 
+                          to={getAuthorId(post.author) ? `/user/${getAuthorId(post.author)}` : '/profile'}
+                          className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors duration-200 truncate"
+                        >
+                          {getAuthorName(post.author)}
+                        </Link>
+                        <span className="text-gray-400 flex-shrink-0">·</span>
+                        <span className="text-sm text-gray-500 flex-shrink-0">
+                          {formatDate(post.createdAt)}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Post Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <Link 
-                        to={getAuthorId(post.author) ? `/user/${getAuthorId(post.author)}` : '/profile'}
-                        className="text-sm font-semibold text-gray-900 hover:text-gray-700 transition-colors duration-200"
-                      >
-                        {getAuthorName(post.author)}
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+                    <div className="flex-1 min-w-0">
+                      <Link to={`/post/${post.slug}`} className="group">
+                        <h2 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors leading-tight">
+                          {post.title}
+                        </h2>
                       </Link>
-                      <span className="text-gray-400">·</span>
-                      <span className="text-sm text-gray-500">
-                        {formatDate(post.createdAt)}
-                      </span>
-                    </div>
 
-                    <Link to={`/post/${post.slug}`} className="group">
-                      <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors leading-tight">
-                        {post.title}
-                      </h2>
-                    </Link>
+                      <p className="text-gray-600 mb-4 sm:mb-5 line-clamp-2 sm:line-clamp-3 leading-relaxed text-sm sm:text-base">
+                        {post.description}
+                      </p>
 
-                    <p className="text-gray-600 mb-5 line-clamp-3 leading-relaxed text-sm sm:text-base">
-                      {post.description}
-                    </p>
+                      {/* Post Stats */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 text-xs sm:text-sm text-gray-500">
+                          <div className="flex items-center space-x-2">
+                            <Clock size={16} aria-hidden="true" />
+                            <span>{calculateReadTime(post.content)} min read</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Heart size={16} aria-hidden="true" />
+                            <span>{post.likes.length}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <MessageCircle size={16} aria-hidden="true" />
+                            <span>{post.comments.length}</span>
+                          </div>
+                        </div>
 
-                    {/* Post Stats */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-gray-500">
-                        <div className="flex items-center space-x-2">
-                          <Clock size={16} aria-hidden="true" />
-                          <span>{calculateReadTime(post.content)} min read</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Heart size={16} aria-hidden="true" />
-                          <span>{post.likes.length}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MessageCircle size={16} aria-hidden="true" />
-                          <span>{post.comments.length}</span>
-                        </div>
+                        {/* Read More */}
+                        <Link
+                          to={`/post/${post.slug}`}
+                          className="text-emerald-600 hover:text-emerald-700 text-sm font-semibold transition-colors hover:underline focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded px-2 py-1 self-start sm:self-auto"
+                        >
+                          Read more
+                        </Link>
                       </div>
-
-                      {/* Read More */}
-                      <Link
-                        to={`/post/${post.slug}`}
-                        className="text-emerald-600 hover:text-emerald-700 text-sm font-semibold transition-colors hover:underline focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded px-2 py-1"
-                      >
-                        Read more
-                      </Link>
                     </div>
+
+                    {/* Post Image */}
+                    {post.imageUrl && (
+                      <div className="flex-shrink-0 w-full sm:w-32 lg:w-36 order-first sm:order-last">
+                        <Link to={`/post/${post.slug}`}>
+                          <img
+                            src={post.imageUrl}
+                            alt={post.title}
+                            className="w-full h-48 sm:h-20 lg:h-28 object-cover rounded-lg sm:rounded-xl shadow-sm group-hover:shadow-md transition-all"
+                          />
+                        </Link>
+                      </div>
+                    )}
                   </div>
-
-                  {/* Post Image */}
-                  {post.imageUrl && (
-                    <div className="flex-shrink-0 sm:ml-8 w-full sm:w-auto">
-                      <Link to={`/post/${post.slug}`}>
-                        <img
-                          src={post.imageUrl}
-                          alt={post.title}
-                          className="w-full sm:w-36 h-40 sm:h-28 object-cover rounded-xl shadow-sm group-hover:shadow-md transition-all"
-                        />
-                      </Link>
-                    </div>
-                  )}
                 </div>
               </article>
             ))}
@@ -381,11 +392,11 @@ const HomePage: React.FC = () => {
 
         {/* Load More Button */}
         {hasMore && posts.length > 0 && (
-      <div className="text-center mt-10">
+          <div className="text-center mt-8 sm:mt-10">
             <button
               onClick={() => fetchPosts(true)}
               disabled={loading}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-8 py-3 rounded-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 inline-flex items-center space-x-2"
+              className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-6 sm:px-8 py-3 rounded-full transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 inline-flex items-center space-x-2 btn-touch"
             >
               {loading ? (
                 <>
@@ -393,7 +404,7 @@ const HomePage: React.FC = () => {
                   <span>Loading...</span>
                 </>
               ) : (
-        <span>Load more stories</span>
+                <span>Load more stories</span>
               )}
             </button>
           </div>

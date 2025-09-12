@@ -103,32 +103,32 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 safe-area-padding">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-black rounded-full mb-6">
-            <span className="text-white font-bold text-xl">npx</span>
+          <div className="inline-flex items-center justify-center w-14 sm:w-16 h-14 sm:h-16 bg-black rounded-full mb-4 sm:mb-6">
+            <span className="text-white font-bold text-lg sm:text-xl">npx</span>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
-          <p className="text-gray-600">Sign in to continue your journey</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Sign in to continue your journey</p>
         </div>
 
         {/* Form */}
-        <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 slide-up">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 slide-up">
+          <form onSubmit={handleSubmit} className="form-stack">
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-start space-x-3 fade-in">
                 <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-white text-xs font-bold">!</span>
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium">{error}</p>
+                  <p className="font-medium text-sm sm:text-base">{error}</p>
                 </div>
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="space-y-4 sm:space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                   Email Address
@@ -209,7 +209,7 @@ const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md"
+                className="w-full flex justify-center items-center py-3 sm:py-3.5 px-4 border border-transparent rounded-lg shadow-sm text-sm sm:text-base font-semibold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-md btn-touch"
               >
                 {loading ? (
                   <>
