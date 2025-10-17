@@ -7,7 +7,6 @@ import {signup,Userlogin,BioUpdate} from "../services/UserService.js";
 
 
 export const register = async(req,res)=>{
-    console.log("camer in resgister ")
     try{
         const {name,email,password,bio,avatar} = req.body;
 
@@ -48,7 +47,6 @@ export const register = async(req,res)=>{
             path: "/",
         });
 
-    console.log("token created");
         res.status(201).json({
             message:"User registered successfully",
             userId:createdUser._id,
@@ -77,7 +75,6 @@ export const login = async(req,res)=>{
         if(token.error) return res.status(401).json({message:token.error});
         
         
-        console.log("token hai ye: ",token);
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -86,7 +83,6 @@ export const login = async(req,res)=>{
             maxAge: 1 * 24 * 60 * 60 * 1000,
             path: "/",
         })
-        console.log("logged in")
         res.status(200).json({
             token,
             // message:"Logged in successfully",
@@ -175,11 +171,9 @@ export const profile = async(req,res)=>{
 
     try{
         const userId = req.user.id;
-        console.log("userid:",userId);
 
         const data = await User.findById(userId).select("name email bio avatar following followers likedPost")
     
-        console.log("Data: ",data);
         return res.status(200).json({data});
     }catch(err){
         console.error(err);
