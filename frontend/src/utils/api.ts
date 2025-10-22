@@ -32,7 +32,17 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   };
 
   try {
-    const response = await fetch(url, config);
+    // Add timeout for slow backend responses
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+    
+    const response = await fetch(url, {
+      ...config,
+      signal: controller.signal,
+    });
+    
+    clearTimeout(timeoutId);
+    
     // Treat 304 Not Modified as a non-fatal condition
     if (response.status === 304) {
       return { status: 304 } as any;
@@ -46,6 +56,9 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   } catch (error) {
     if (error instanceof ApiError) {
       throw error;
+    }
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new ApiError(408, 'Request timeout - server is taking too long to respond');
     }
     throw new ApiError(0, 'Network error');
   }

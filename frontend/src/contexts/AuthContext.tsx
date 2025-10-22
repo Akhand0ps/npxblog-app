@@ -20,22 +20,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
-    checkAuthStatus();
+    // Show loading for minimum 500ms to prevent flash, then check auth
+    const minLoadingTime = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    // Defer auth check to allow immediate rendering
+    const authCheckTimeout = setTimeout(() => {
+      checkAuthStatus();
+    }, 100);
+    
+    return () => {
+      clearTimeout(minLoadingTime);
+      clearTimeout(authCheckTimeout);
+    };
   }, []);
 
   const checkAuthStatus = async () => {
+    if (authChecked) return; // Prevent multiple auth checks
+    
     try {
-      console.log('🔍 AuthContext - Checking authentication status...');
+      if (import.meta.env.DEV) console.log('🔍 AuthContext - Checking authentication status...');
       const response = await api.getProfile();
-      console.log('✅ AuthContext - Profile response:', response);
+      if (import.meta.env.DEV) console.log('✅ AuthContext - Profile response:', response);
       
       // Handle 304 Not Modified response - user is authenticated
       if ((response as any)?.status === 304) {
-        console.log('ℹ️ AuthContext - Received 304 Not Modified from profile endpoint');
+        if (import.meta.env.DEV) console.log('ℹ️ AuthContext - Received 304 Not Modified from profile endpoint');
         if (user) {
-          console.log('ℹ️ AuthContext - Keeping existing user from state:', user.name);
+          if (import.meta.env.DEV) console.log('ℹ️ AuthContext - Keeping existing user from state:', user.name);
           setIsAuthenticated(true);
           return;
         }
@@ -47,36 +63,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (response && (response as any).data) {
         const userData = (response as any).data as User;
-        console.log('✅ AuthContext - User authenticated:', userData.name, 'ID:', userData._id);
+        if (import.meta.env.DEV) console.log('✅ AuthContext - User authenticated:', userData.name, 'ID:', userData._id);
         setUser(userData);
         setIsAuthenticated(true);
       } else {
-        console.log('❌ AuthContext - No user data in response');
+        if (import.meta.env.DEV) console.log('❌ AuthContext - No user data in response');
         setUser(null);
         setIsAuthenticated(false);
       }
     } catch (error) {
-      console.log('❌ AuthContext - Authentication check failed:', error);
+      if (import.meta.env.DEV) console.log('❌ AuthContext - Authentication check failed:', error);
       setUser(null);
       setIsAuthenticated(false);
+      
+      // If it's a timeout or network error, keep loading false so app can still be used
+      if (error instanceof ApiError && (error.status === 408 || error.status === 0)) {
+        if (import.meta.env.DEV) console.log('� AuthContext - Network/timeout error, allowing unauthenticated access');
+      }
     } finally {
-      console.log('🔄 AuthContext - Authentication check complete, setting loading to false');
-      setLoading(false);
+      if (import.meta.env.DEV) console.log('🔄 AuthContext - Authentication check complete');
+      setAuthChecked(true);
     }
   };
 
   const login = async (email: string, password: string) => {
     try {
-      console.log('🔐 AuthContext - Attempting login...');
+      if (import.meta.env.DEV) console.log('🔐 AuthContext - Attempting login...');
       const response = await api.login({ email, password });
-      console.log('✅ AuthContext - Login response:', response);
+      if (import.meta.env.DEV) console.log('✅ AuthContext - Login response:', response);
       
       if (response.token) {
-        console.log('✅ AuthContext - Login successful, updating auth state...');
+        if (import.meta.env.DEV) console.log('✅ AuthContext - Login successful, updating auth state...');
         
         // After successful login, fetch user profile and update state
+        setAuthChecked(false); // Allow re-checking auth
         await checkAuthStatus();
-        console.log('✅ AuthContext - Login complete, auth state updated');
+        if (import.meta.env.DEV) console.log('✅ AuthContext - Login complete, auth state updated');
         return { success: true };
       }
       return { success: false, error: 'Login failed. Please try again.' };
@@ -89,16 +111,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const register = async (userData: { name: string; email: string; password: string; bio?: string; avatar?: string }) => {
     try {
-      console.log('📝 AuthContext - Attempting registration...');
+      if (import.meta.env.DEV) console.log('📝 AuthContext - Attempting registration...');
       const response = await api.register(userData);
-      console.log('✅ AuthContext - Registration response:', response);
+      if (import.meta.env.DEV) console.log('✅ AuthContext - Registration response:', response);
       
       if (response.userId) {
-        console.log('✅ AuthContext - Registration successful, updating auth state...');
+        if (import.meta.env.DEV) console.log('✅ AuthContext - Registration successful, updating auth state...');
         
         // After successful registration, fetch user profile and update state
+        setAuthChecked(false); // Allow re-checking auth
         await checkAuthStatus();
-        console.log('✅ AuthContext - Registration complete, auth state updated');
+        if (import.meta.env.DEV) console.log('✅ AuthContext - Registration complete, auth state updated');
         return { success: true };
       }
       return { success: false, error: 'Registration failed. Please try again.' };
@@ -111,15 +134,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
-      console.log('🚪 AuthContext - Logging out...');
+      if (import.meta.env.DEV) console.log('🚪 AuthContext - Logging out...');
       await api.logout();
     } catch (error) {
-      console.error('AuthContext - Logout error:', error);
+      if (import.meta.env.DEV) console.error('AuthContext - Logout error:', error);
     } finally {
       // Clear local state regardless of API response
-      console.log('✅ AuthContext - Logout complete, clearing state');
+      if (import.meta.env.DEV) console.log('✅ AuthContext - Logout complete, clearing state');
       setUser(null);
       setIsAuthenticated(false);
+      setAuthChecked(false);
     }
   };
 

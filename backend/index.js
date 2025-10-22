@@ -14,7 +14,21 @@ app.get("/", (req, res) => {
 });
 
 app.get("/health", (req, res) => {
-    res.status(200).json({ status: "ok" });
+    res.status(200).json({ 
+        status: "ok", 
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        memory: process.memoryUsage(),
+        env: process.env.NODE_ENV || 'development'
+    });
+});
+
+// Keep-alive endpoint to prevent cold starts
+app.get("/api/v1/ping", (req, res) => {
+    res.status(200).json({ 
+        message: "pong", 
+        timestamp: new Date().toISOString() 
+    });
 });
 
 // Start server immediately so Render detects the open port

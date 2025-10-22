@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar.tsx';
+import LoadingScreen from './components/LoadingScreen.tsx';
+import { useAuth } from './hooks/useAuth.ts';
 
 // Lazy load components
 const HomePage = lazy(() => import('./pages/HomePage.tsx'));
@@ -12,7 +14,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage.tsx'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage.tsx'));
 const EditPostPage = lazy(() => import('./pages/EditPostPage.tsx'));
 
-// Loading component
+// Loading component for page transitions
 const PageLoader = () => (
   <div className="min-h-96 flex items-center justify-center">
     <div className="text-center space-y-4">
@@ -25,6 +27,13 @@ const PageLoader = () => (
 );
 
 function App() {
+  const { loading } = useAuth();
+
+  // Show enhanced loading screen only for initial auth check
+  if (loading) {
+    return <LoadingScreen message="Initializing app..." showBackendWarning={true} />;
+  }
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 flex flex-col">
