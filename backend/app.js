@@ -14,7 +14,7 @@ const app = express();
 app.set('trust proxy', 1);
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://npxbg.vercel.app"],
+  origin: ["http://localhost:5173", "https://npxbg.vercel.app","https://npxblog-app.onrender.com"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   // Do not hardcode allowedHeaders/exposedHeaders so cors reflects request headers dynamically

@@ -30,7 +30,7 @@ connectDB()
     .catch((err) => {
         console.error("Database connection failed:", err?.message || err);
         // Intentionally not exiting so the port remains bound for platform health checks
-    });
+});
 
 
 
