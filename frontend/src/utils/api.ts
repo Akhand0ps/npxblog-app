@@ -1,5 +1,9 @@
 // API utility functions - matching backend endpoints
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (
+  import.meta.env.PROD 
+    ? 'https://npxblog-app.onrender.com/api/v1'  // Production backend on Render
+    : 'http://localhost:3000/api/v1'             // Local development
+);
 
 class ApiError extends Error {
   public status: number;
